@@ -200,10 +200,17 @@ function displayRandomVideo(){
     const videoEl = document.getElementById('motivationalVideo');
     videoEl.src = getRandomElement(videos);
     videoEl.muted = false;
+
     document.getElementById('videoContainer').style.display='block';
     document.getElementById('quoteBox').style.display='none';
-    videoEl.play().then(()=>videoEl.requestFullscreen().catch(()=>{}));
+
+    videoEl.play().then(() => {
+        if (videoEl.requestFullscreen) videoEl.requestFullscreen();
+        else if (videoEl.webkitRequestFullscreen) videoEl.webkitRequestFullscreen();  
+        else if (videoEl.msRequestFullscreen) videoEl.msRequestFullscreen();
+    }).catch(()=>{});
 }
+
 
 function changeBackground(){
     document.getElementById('backgroundImage').style.backgroundImage = `url('${getRandomElement(backgroundImages)}')`;
@@ -244,15 +251,20 @@ window.addEventListener('load', ()=>{
     }
 });
 
-// Play audio on first click anywhere
-document.body.addEventListener('click', function startAudioOnce() {
+// Start audio when user touches/clicks ANYWHERE
+function enableAudioOnTouch() {
+    const audio = document.getElementById('backgroundAudio');
     if (audioEnabled) {
-        const audio = document.getElementById('backgroundAudio');
-        audio.play().catch(() => {});
+        audio.muted = false;
+        audio.play().catch(()=>{});
     }
-    // Remove this listener after the first click so it doesn't keep firing
-    document.body.removeEventListener('click', startAudioOnce);
-});
+    document.removeEventListener('click', enableAudioOnTouch);
+    document.removeEventListener('touchstart', enableAudioOnTouch);
+}
+
+document.addEventListener('click', enableAudioOnTouch);
+document.addEventListener('touchstart', enableAudioOnTouch);
+
 
     
 </script>
