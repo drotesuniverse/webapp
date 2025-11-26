@@ -243,6 +243,18 @@ window.addEventListener('load', ()=>{
         displayRandomVideo();
     }
 });
+
+// Play audio on first click anywhere
+document.body.addEventListener('click', function startAudioOnce() {
+    if (audioEnabled) {
+        const audio = document.getElementById('backgroundAudio');
+        audio.play().catch(() => {});
+    }
+    // Remove this listener after the first click so it doesn't keep firing
+    document.body.removeEventListener('click', startAudioOnce);
+});
+
+    
 </script>
 
 </body>
