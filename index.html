@@ -125,14 +125,14 @@
         ];
 
         const audios = [
-            'https://assets.mixkit.co/music/preview/mixkit-inspiring-cinematic-ambient-1161.mp3',
-            'https://assets.mixkit.co/music/preview/mixkit-deep-urban-623.mp3',
-            'https://assets.mixkit.co/music/preview/mixkit-hope-1360.mp3'
+            'assets/audio/motivation1.mp3',
+            'assets/audio/motivation2.mp3',
+            'assets/audio/motivation3.mp3',
+            'assets/audio/motivation4.mp3'
         ];
 
         let audioEnabled = true;
         let currentContentType = 'quote';
-        let userInteracted = false;
 
         function getRandomElement(arr){ return arr[Math.floor(Math.random()*arr.length)]; }
 
@@ -146,6 +146,7 @@
                 quoteText.textContent = `"${quote.text}"`;
                 quoteAuthor.textContent = `— ${quote.author}`;
                 quoteBox.classList.add('fade-in');
+                playRandomAudio();
             }, 300);
         }
 
@@ -165,99 +166,59 @@
             bg.style.backgroundImage = `url('${getRandomElement(backgroundImages)}')`;
         }
 
-        function playRandomAudio(){
-            if(!audioEnabled || currentContentType !== 'quote') return;
-            const audio = document.getElementById('backgroundAudio');
-            audio.src = getRandomElement(audios);
-            audio.play().catch(e => console.log("Audio play blocked:", e));
-        }
-
         function toggleContent(){
             const quoteBox = document.getElementById('quoteBox');
             const videoContainer = document.getElementById('videoContainer');
-            const audio = document.getElementById('backgroundAudio');
-            
             quoteBox.style.display = 'none';
             videoContainer.style.display = 'none';
 
-            if(Math.random() < 0.7){
-                currentContentType = 'quote';
-                quoteBox.style.display = 'block';
+            if(Math.random()<0.7){
+                currentContentType='quote';
+                quoteBox.style.display='block';
                 displayRandomQuote();
-                // Play audio only for quotes
-                if(audioEnabled) {
-                    playRandomAudio();
-                }
             } else {
-                currentContentType = 'video';
-                videoContainer.style.display = 'block';
+                currentContentType='video';
+                videoContainer.style.display='block';
                 displayRandomVideo();
-                // Stop audio when video is playing
-                audio.pause();
             }
 
             changeBackground();
+        }
+
+        function playRandomAudio(){
+            if(!audioEnabled || currentContentType!=='quote') return;
+            const audio = document.getElementById('backgroundAudio');
+            audio.src = getRandomElement(audios);
+            audio.muted = true;
+            audio.play().catch(e=>console.log("Audio blocked:",e));
         }
 
         function toggleAudio(){
             const audio = document.getElementById('backgroundAudio');
             const icon = document.getElementById('audioToggle').querySelector('i');
             if(audioEnabled){
-                audio.pause(); 
-                audioEnabled = false; 
-                icon.className = 'fas fa-volume-mute';
+                audio.pause(); audioEnabled=false; icon.className='fas fa-volume-mute';
             } else {
-                audioEnabled = true; 
-                icon.className = 'fas fa-volume-up';
-                // If we're showing a quote, play audio
-                if(currentContentType === 'quote') {
-                    playRandomAudio();
-                }
+                if(currentContentType==='quote'){ audio.play().catch(e=>console.log(e)); }
+                audioEnabled=true; icon.className='fas fa-volume-up';
             }
         }
 
-        // Initialize audio on first user interaction
-        function initializeAudio() {
-            if (!userInteracted) {
-                userInteracted = true;
-                const audio = document.getElementById('backgroundAudio');
-                audio.muted = false;
-                // If we're showing a quote, play audio
-                if(currentContentType === 'quote' && audioEnabled) {
-                    playRandomAudio();
-                }
+        // Unmute on first user interaction
+        document.addEventListener('click', ()=>{
+            const audio = document.getElementById('backgroundAudio');
+            if(audio.muted && currentContentType==='quote'){
+                audio.muted=false;
+                audio.play().catch(e=>console.log("Audio play blocked:",e));
             }
-        }
+        }, {once:true});
 
-        // Event listeners
-        document.addEventListener('keydown', (e)=>{ 
-            if(e.code === 'Space'){ 
-                e.preventDefault(); 
-                initializeAudio();
-                toggleContent(); 
-            } 
-        });
-        
-        document.addEventListener('click', (e)=>{ 
-            if(!e.target.closest('.audio-controls')) {
-                initializeAudio();
-                toggleContent(); 
-            }
-        });
-        
+        document.addEventListener('keydown', (e)=>{ if(e.code==='Space'){ e.preventDefault(); toggleContent(); }});
+        document.addEventListener('click', (e)=>{ if(!e.target.closest('.audio-controls')) toggleContent(); });
         document.getElementById('audioToggle').addEventListener('click', toggleAudio);
 
         // Initialize
         toggleContent();
-        
-        // Try to autoplay on page load (may not work in all browsers)
-        setTimeout(() => {
-            if(currentContentType === 'quote' && audioEnabled) {
-                const audio = document.getElementById('backgroundAudio');
-                audio.muted = true; // Start muted to pass autoplay restrictions
-                playRandomAudio();
-            }
-        }, 1000);
     </script>
 </body>
 </html>
