@@ -282,21 +282,6 @@ function enableAudioOnTouch() {
 
 document.addEventListener('click', enableAudioOnTouch);
 document.addEventListener('touchstart', enableAudioOnTouch);
-
-// Add click functionality to change content
-document.addEventListener('click', function(e) {
-    // Don't trigger if clicking on audio controls or video controls
-    if (!e.target.closest('.audio-controls') && !e.target.closest('video')) {
-        if(Math.random() < 0.7){
-            currentContentType = 'quote';
-            displayRandomQuote();
-        } else {
-            currentContentType = 'video';
-            displayRandomVideo();
-        }
-        changeBackground();
-    }
-});
 </script>
 
 </body>
