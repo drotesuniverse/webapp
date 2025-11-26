@@ -11,25 +11,113 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <style>
 * { margin:0; padding:0; box-sizing:border-box; font-family: 'Oswald', sans-serif; }
-body { background:#0a0a0a; color:#f0f0f0; min-height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:20px; position:relative; overflow-x:hidden; }
-.background-image { position:absolute; top:0; left:0; width:100%; height:100%; background-size:cover; background-position:center; opacity:0.4; z-index:-1; transition: background-image 1.5s ease-in-out; }
-.container { max-width:900px; width:100%; text-align:center; z-index:1; margin:auto; display:flex; flex-direction:column; justify-content:center; align-items:center; flex:1; }
-.quote-box { background: rgba(20,20,20,0.7); border-radius:16px; padding:60px 40px; margin-bottom:20px; box-shadow:0 10px 30px rgba(0,0,0,0.5); border:1px solid rgba(100,100,100,0.2); position:relative; overflow:hidden; backdrop-filter:blur(5px); width:100%; max-width:800px; }
-.quote-box::before { content:""; position:absolute; top:0; left:0; width:100%; height:4px; background:linear-gradient(90deg,#8B0000,#B22222,#8B0000); }
-.quote-text { font-size:2.2rem; line-height:1.4; margin-bottom:30px; font-weight:300; color:#f8f8f8; text-shadow:0 2px 4px rgba(0,0,0,0.5);}
-.quote-author { font-size:1.3rem; color:#B22222; font-style:italic; font-weight:400; text-shadow:0 1px 2px rgba(0,0,0,0.5);}
-.video-container { width:100%; max-width:800px; background:rgba(20,20,20,0.7); border-radius:16px; padding:20px; margin-bottom:20px; box-shadow:0 10px 30px rgba(0,0,0,0.5); border:1px solid rgba(100,100,100,0.2); backdrop-filter:blur(5px); position:relative; }
-.video-container::before { content:""; position:absolute; top:0; left:0; width:100%; height:4px; background:linear-gradient(90deg,#8B0000,#B22222,#8B0000); }
-.motivational-video { width:100%; border-radius:8px; max-height:450px; }
-.branding-bottom { padding:20px; text-align:center; margin-top:auto; }
-.brand-logo-bottom { font-size:1.8rem; font-weight:700; letter-spacing:3px; color:#f0f0f0; text-shadow:0 2px 4px rgba(0,0,0,0.7); position:relative; display:inline-block; }
-.brand-logo-bottom::after { content:""; position:absolute; bottom:-8px; left:10%; width:80%; height:2px; background:linear-gradient(90deg,transparent,#B22222,transparent); }
+body { 
+    background:#0a0a0a; 
+    color:#f0f0f0; 
+    min-height:100vh; 
+    display:flex; 
+    flex-direction:column; 
+    align-items:center; 
+    justify-content:space-between; /* Changed from center to space-between */
+    padding:10px; /* Reduced padding */
+    position:relative; 
+    overflow-x:hidden; 
+}
+.background-image { 
+    position:absolute; 
+    top:0; 
+    left:0; 
+    width:100%; 
+    height:100%; 
+    background-size:cover; 
+    background-position:center; 
+    opacity:0.4; 
+    z-index:-1; 
+    transition: background-image 1.5s ease-in-out; 
+}
+.container { 
+    max-width:900px; 
+    width:100%; 
+    text-align:center; 
+    z-index:1; 
+    margin:auto; 
+    display:flex; 
+    flex-direction:column; 
+    justify-content:center; 
+    align-items:center; 
+    flex:1; 
+    padding: 10px 0; /* Added padding */
+}
+.quote-box { 
+    background: rgba(20,20,20,0.7); 
+    border-radius:16px; 
+    padding:40px 30px; /* Reduced padding */
+    margin-bottom:15px; /* Reduced margin */
+    box-shadow:0 10px 30px rgba(0,0,0,0.5); 
+    border:1px solid rgba(100,100,100,0.2); 
+    position:relative; 
+    overflow:hidden; 
+    backdrop-filter:blur(5px); 
+    width:100%; 
+    max-width:800px; 
+}
+.quote-box::before { 
+    content:""; 
+    position:absolute; 
+    top:0; 
+    left:0; 
+    width:100%; 
+    height:4px; 
+    background:linear-gradient(90deg,#8B0000,#B22222,#8B0000); 
+}
+.quote-text { 
+    font-size:2.2rem; 
+    line-height:1.4; 
+    margin-bottom:30px; 
+    font-weight:300; 
+    color:#f8f8f8;
+    text-shadow:0 2px 4px rgba(0,0,0,0.5);
+}
+.quote-author { 
+    font-size:1.3rem; 
+    color:#B22222; 
+    font-style:italic; 
+    font-weight:400; 
+    text-shadow:0 1px 2px rgba(0,0,0,0.5);
+}
+.video-container { 
+    width:100%; 
+    max-width:800px; 
+    background:rgba(20,20,20,0.7); 
+    border-radius:16px; 
+    padding:15px; /* Reduced padding */
+    margin-bottom:15px; /* Reduced margin */
+    box-shadow:0 10px 30px rgba(0,0,0,0.5); 
+    border:1px solid rgba(100,100,100,0.2); 
+    backdrop-filter:blur(5px); 
+    position:relative; 
+}
+.video-container::before { 
+    content:""; 
+    position:absolute; 
+    top:0; 
+    left:0; 
+    width:100%; 
+    height:4px; 
+    background:linear-gradient(90deg,#8B0000,#B22222,#8B0000); 
+}
+.motivational-video { 
+    width:100%; 
+    border-radius:8px; 
+    max-height:450px; 
+}
 .branding-top { 
     position: absolute; 
     top: 10px;             
     left: 50%;             
     transform: translateX(-50%); 
     text-align: center; 
+    z-index: 2;
 }
 .brand-logo-top img { 
     height: 40px;          
@@ -37,8 +125,9 @@ body { background:#0a0a0a; color:#f0f0f0; min-height:100vh; display:flex; flex-d
 
 .branding-bottom {
     position: relative; 
-    margin-top: 15px;   
     text-align: center;
+    padding: 15px 0; /* Added padding */
+    width: 100%;
 }
 .brand-logo-bottom img {
     height: 35px;        
@@ -49,7 +138,82 @@ body { background:#0a0a0a; color:#f0f0f0; min-height:100vh; display:flex; flex-d
 .audio-controls { position:fixed; bottom:80px; left:20px; z-index:10; }
 .audio-btn { background: rgba(178,34,34,0.7); border:none; border-radius:50%; width:50px; height:50px; color:white; cursor:pointer; transition:all 0.3s ease; display:flex; align-items:center; justify-content:center; font-size:1.2rem; }
 .audio-btn:hover { background: rgba(178,34,34,0.9); transform: scale(1.1);}
-@media(max-width:768px){ .quote-text{font-size:1.6rem;} .quote-box{padding:40px 20px;} .brand-logo-bottom{font-size:1.4rem;} .branding-top{top:15px; right:15px;} .audio-controls{bottom:70px; left:15px;} }    
+
+/* Mobile-specific adjustments */
+@media (max-width: 768px){
+    body {
+        padding: 8px; /* Further reduced padding */
+        justify-content: space-between; /* Ensure space distribution */
+    }
+    
+    .container {
+        padding: 5px 0; /* Reduced padding */
+        justify-content: center; /* Center content */
+    }
+    
+    .quote-text {
+        font-size: 1.6rem; 
+        margin-bottom: 20px; /* Reduced margin */
+    }
+    
+    .quote-box {
+        padding: 30px 20px; /* Further reduced padding */
+        margin-bottom: 10px; /* Further reduced margin */
+    }
+    
+    .video-container {
+        padding: 12px; /* Further reduced padding */
+        margin-bottom: 10px; /* Further reduced margin */
+    }
+    
+    .branding-top {
+        top: 8px; /* Adjusted position */
+    }
+    
+    .brand-logo-top img {
+        height: 30px; /* Smaller logo */
+    }
+    
+    .branding-bottom {
+        padding: 10px 0; /* Reduced padding */
+    }
+    
+    .brand-logo-bottom img {
+        height: 30px; /* Smaller logo */
+    }
+    
+    .audio-controls {
+        bottom: 70px; 
+        left: 15px;
+    }
+}
+
+/* Extra small devices */
+@media (max-width: 480px) {
+    .quote-text {
+        font-size: 1.4rem;
+    }
+    
+    .quote-box {
+        padding: 25px 15px;
+    }
+    
+    .branding-top {
+        top: 5px;
+    }
+    
+    .brand-logo-top img {
+        height: 25px;
+    }
+    
+    .branding-bottom {
+        padding: 8px 0;
+    }
+    
+    .brand-logo-bottom img {
+        height: 25px;
+    }
+}
 </style>
 </head>
 <body>
@@ -100,7 +264,7 @@ const quotes = [
     { text: "Discipline is the bridge between goals and accomplishment.", author: "Jim Rohn" },
     { text: "Conquer yourself or the world will conquer you.", author: "Napoleon Hill" },
     { text: "The best revenge is not to be like your enemy.", author: "Marcus Aurelius" },
-    { text: "A man’s worth is no greater than his ambitions.", author: "Marcus Aurelius" },
+    { text: "A man's worth is no greater than his ambitions.", author: "Marcus Aurelius" },
     { text: "I came, I saw, I conquered.", author: "Julius Caesar" },
     { text: "If you want peace, prepare for war.", author: "Vegetius" },
     { text: "Lead me, follow me, or get out of my way.", author: "George S. Patton" },
@@ -109,7 +273,7 @@ const quotes = [
     { text: "Who dares wins.", author: "SAS Motto" },
     { text: "Nobody is coming to save you.", author: "Nathaniel Branden" },
     { text: "The universe doesn't give you what you ask for with your thoughts - it gives you what you demand with your actions.", author: "Steve Maraboli" },
-    { text: "Don’t wish it were easier. Wish you were better.", author: "Jim Rohn" },
+    { text: "Don't wish it were easier. Wish you were better.", author: "Jim Rohn" },
     { text: "Discipline is doing what you hate to do, but doing it like you love it.", author: "Mike Tyson" },
     { text: "It is easier to find men who will volunteer to die, than to find those who are willing to endure pain with patience.", author: "Julius Caesar" },
     { text: "Freedom is not the right to do what you want, but the strength to do what you must.", author: "Unknown" },
@@ -124,19 +288,19 @@ const quotes = [
     { text: "Victory belongs to the most persevering.", author: "Napoleon Bonaparte" },
     { text: "Pain is weakness leaving the body.", author: "US Marine Corps" },
     { text: "Better to die standing than to live on your knees.", author: "Emiliano Zapata" },
-    { text: "Bravery is being the only one who knows you’re afraid.", author: "David Hackworth" },
+    { text: "Bravery is being the only one who knows you're afraid.", author: "David Hackworth" },
     { text: "I don't stop when I'm tired. I stop when I'm done.", author: "David Goggins" },
-    { text: "Don’t count the days, make the days count.", author: "Muhammad Ali" },
+    { text: "Don't count the days, make the days count.", author: "Muhammad Ali" },
     { text: "Action is the foundational key to all success.", author: "Pablo Picasso" },
     { text: "Do what you can, with what you have, where you are.", author: "Theodore Roosevelt" },
-    { text: "Screw it, let’s do it.", author: "Richard Branson" },
+    { text: "Screw it, let's do it.", author: "Richard Branson" },
     { text: "The way to get started is to quit talking and begin doing.", author: "Walt Disney" },
     { text: "Move fast and break things.", author: "Mark Zuckerberg" },
     { text: "Don't watch the clock; do what it does. Keep going.", author: "Sam Levenson" },
     { text: "Either you run the day, or the day runs you.", author: "Jim Rohn" },
     { text: "If you are going through hell, keep going.", author: "Winston Churchill" },
     { text: "Whatever you are, be a good one.", author: "Abraham Lincoln" },
-    { text: "Whether you think you can or you think you can’t, you’re right.", author: "Henry Ford" },
+    { text: "Whether you think you can or you think you can't, you're right.", author: "Henry Ford" },
     { text: "Stay hungry. Stay foolish.", author: "Steve Jobs" },
     { text: "Your time is limited, so don't waste it living someone else's life.", author: "Steve Jobs" },
     { text: "Impossible is just a big word thrown around by small men.", author: "Muhammad Ali" },
@@ -144,13 +308,13 @@ const quotes = [
     { text: "Every man dies. Not every man really lives.", author: "William Wallace" },
     { text: "To improve is to change.", author: "Winston Churchill" },
     { text: "Simplicity is the ultimate sophistication.", author: "Leonardo da Vinci" },
-    { text: "Be so good they can’t ignore you.", author: "Steve Martin" },
+    { text: "Be so good they can't ignore you.", author: "Steve Martin" },
     { text: "Fall seven times, stand up eight.", author: "Japanese Proverb" },
-    { text: "I’ve failed over and over and over again in my life. And that is why I succeed.", author: "Michael Jordan" },
+    { text: "I've failed over and over and over again in my life. And that is why I succeed.", author: "Michael Jordan" },
     { text: "Pain is temporary. Quitting lasts forever.", author: "Lance Armstrong" },
     { text: "Don't wish it were easier. Wish you were better.", author: "Jim Rohn" },
     { text: "Success is stumbling from failure to failure with no loss of enthusiasm.", author: "Winston Churchill" },
-    { text: "It’s hard to beat a person who never gives up.", author: "Babe Ruth" },
+    { text: "It's hard to beat a person who never gives up.", author: "Babe Ruth" },
     { text: "You miss 100% of the shots you don't take.", author: "Wayne Gretzky" },
     { text: "A smooth sea never made a skilled sailor.", author: "Franklin D. Roosevelt" },
     { text: "Show me a good loser, and I'll show you a loser.", author: "Vince Lombardi" },
@@ -198,7 +362,15 @@ function displayRandomVideo(){
     videoEl.muted = false;
     document.getElementById('videoContainer').style.display='block';
     document.getElementById('quoteBox').style.display='none';
-    videoEl.play().then(()=>videoEl.requestFullscreen().catch(()=>{}));
+    
+    // Try to enter fullscreen (may not work on all mobile browsers)
+    if (videoEl.requestFullscreen) {
+        videoEl.play().then(() => {
+            videoEl.requestFullscreen().catch(() => {});
+        });
+    } else {
+        videoEl.play();
+    }
 }
 
 function changeBackground(){
@@ -210,8 +382,23 @@ function playRandomAudio(){
     const audio = document.getElementById('backgroundAudio');
     audio.src = getRandomElement(audios);
     audio.muted = false;
-    audio.play().catch(e=>console.log("Audio play blocked:",e));
+    audio.play().catch(e => console.log("Audio play blocked:", e));
 }
+
+// Add click/tap functionality to change content
+document.addEventListener('click', function(e) {
+    // Don't trigger if clicking on audio controls or video controls
+    if (!e.target.closest('.audio-controls') && !e.target.closest('video')) {
+        if(Math.random() < 0.7){
+            currentContentType = 'quote';
+            displayRandomQuote();
+        } else {
+            currentContentType = 'video';
+            displayRandomVideo();
+        }
+        changeBackground();
+    }
+});
 
 // Audio toggle
 document.getElementById('audioToggle').addEventListener('click', ()=>{
@@ -219,23 +406,25 @@ document.getElementById('audioToggle').addEventListener('click', ()=>{
     const icon = document.getElementById('audioToggle').querySelector('i');
     if(audioEnabled){
         audio.pause();
-        audioEnabled=false;
-        icon.className='fas fa-volume-mute';
+        audioEnabled = false;
+        icon.className = 'fas fa-volume-mute';
     } else {
-        audio.play().catch(()=>{});
-        audioEnabled=true;
-        icon.className='fas fa-volume-up';
+        audioEnabled = true;
+        icon.className = 'fas fa-volume-up';
+        if(currentContentType === 'quote') {
+            playRandomAudio();
+        }
     }
 });
 
 // Initialize once on page load
 window.addEventListener('load', ()=>{
     changeBackground();
-    if(Math.random()<0.7){
-        currentContentType='quote';
+    if(Math.random() < 0.7){
+        currentContentType = 'quote';
         displayRandomQuote();
     } else {
-        currentContentType='video';
+        currentContentType = 'video';
         displayRandomVideo();
     }
 });
