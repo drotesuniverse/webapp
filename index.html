@@ -25,15 +25,16 @@ body { background:#0a0a0a; color:#f0f0f0; min-height:100vh; display:flex; flex-d
 .brand-logo-bottom { font-size:1.8rem; font-weight:700; letter-spacing:3px; color:#f0f0f0; text-shadow:0 2px 4px rgba(0,0,0,0.7); position:relative; display:inline-block; }
 .brand-logo-bottom::after { content:""; position:absolute; bottom:-8px; left:10%; width:80%; height:2px; background:linear-gradient(90deg,transparent,#B22222,transparent); }
 .branding-top { 
-    position:absolute; 
-    top:50%;        /* vertically center */
-    right:20px;     /* keep right-aligned */
-    transform: translateY(-50%); /* adjust for perfect centering */
-    text-align:right; 
+    position: absolute; 
+    top: 20px;             /* distance from top of page */
+    left: 50%;             /* center horizontally */
+    transform: translateX(-50%); /* adjust horizontal centering */
+    text-align: center; 
 }
-.brand-logo-top img { height:40px; } /* smaller logo */
+.brand-logo-top img { 
+    height: 40px;          /* smaller logo */
+}
 
-.brand-logo-top img { height:50px; }
 .fade-in { animation: fadeIn 1.5s ease-in-out; }
 @keyframes fadeIn { from { opacity:0; transform:translateY(20px);} to { opacity:1; transform:translateY(0);} }
 .audio-controls { position:fixed; bottom:80px; left:20px; z-index:10; }
