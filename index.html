@@ -104,7 +104,7 @@ const quotes = [
     { text: "Discipline is the bridge between goals and accomplishment.", author: "Jim Rohn" },
     { text: "Conquer yourself or the world will conquer you.", author: "Napoleon Hill" },
     { text: "The best revenge is not to be like your enemy.", author: "Marcus Aurelius" },
-    { text: "A man’s worth is no greater than his ambitions.", author: "Marcus Aurelius" },
+    { text: "A man's worth is no greater than his ambitions.", author: "Marcus Aurelius" },
     { text: "I came, I saw, I conquered.", author: "Julius Caesar" },
     { text: "If you want peace, prepare for war.", author: "Vegetius" },
     { text: "Lead me, follow me, or get out of my way.", author: "George S. Patton" },
@@ -113,7 +113,7 @@ const quotes = [
     { text: "Who dares wins.", author: "SAS Motto" },
     { text: "Nobody is coming to save you.", author: "Nathaniel Branden" },
     { text: "The universe doesn't give you what you ask for with your thoughts - it gives you what you demand with your actions.", author: "Steve Maraboli" },
-    { text: "Don’t wish it were easier. Wish you were better.", author: "Jim Rohn" },
+    { text: "Don't wish it were easier. Wish you were better.", author: "Jim Rohn" },
     { text: "Discipline is doing what you hate to do, but doing it like you love it.", author: "Mike Tyson" },
     { text: "It is easier to find men who will volunteer to die, than to find those who are willing to endure pain with patience.", author: "Julius Caesar" },
     { text: "Freedom is not the right to do what you want, but the strength to do what you must.", author: "Unknown" },
@@ -128,19 +128,19 @@ const quotes = [
     { text: "Victory belongs to the most persevering.", author: "Napoleon Bonaparte" },
     { text: "Pain is weakness leaving the body.", author: "US Marine Corps" },
     { text: "Better to die standing than to live on your knees.", author: "Emiliano Zapata" },
-    { text: "Bravery is being the only one who knows you’re afraid.", author: "David Hackworth" },
+    { text: "Bravery is being the only one who knows you're afraid.", author: "David Hackworth" },
     { text: "I don't stop when I'm tired. I stop when I'm done.", author: "David Goggins" },
-    { text: "Don’t count the days, make the days count.", author: "Muhammad Ali" },
+    { text: "Don't count the days, make the days count.", author: "Muhammad Ali" },
     { text: "Action is the foundational key to all success.", author: "Pablo Picasso" },
     { text: "Do what you can, with what you have, where you are.", author: "Theodore Roosevelt" },
-    { text: "Screw it, let’s do it.", author: "Richard Branson" },
+    { text: "Screw it, let's do it.", author: "Richard Branson" },
     { text: "The way to get started is to quit talking and begin doing.", author: "Walt Disney" },
     { text: "Move fast and break things.", author: "Mark Zuckerberg" },
     { text: "Don't watch the clock; do what it does. Keep going.", author: "Sam Levenson" },
     { text: "Either you run the day, or the day runs you.", author: "Jim Rohn" },
     { text: "If you are going through hell, keep going.", author: "Winston Churchill" },
     { text: "Whatever you are, be a good one.", author: "Abraham Lincoln" },
-    { text: "Whether you think you can or you think you can’t, you’re right.", author: "Henry Ford" },
+    { text: "Whether you think you can or you think you can't, you're right.", author: "Henry Ford" },
     { text: "Stay hungry. Stay foolish.", author: "Steve Jobs" },
     { text: "Your time is limited, so don't waste it living someone else's life.", author: "Steve Jobs" },
     { text: "Impossible is just a big word thrown around by small men.", author: "Muhammad Ali" },
@@ -148,13 +148,13 @@ const quotes = [
     { text: "Every man dies. Not every man really lives.", author: "William Wallace" },
     { text: "To improve is to change.", author: "Winston Churchill" },
     { text: "Simplicity is the ultimate sophistication.", author: "Leonardo da Vinci" },
-    { text: "Be so good they can’t ignore you.", author: "Steve Martin" },
+    { text: "Be so good they can't ignore you.", author: "Steve Martin" },
     { text: "Fall seven times, stand up eight.", author: "Japanese Proverb" },
-    { text: "I’ve failed over and over and over again in my life. And that is why I succeed.", author: "Michael Jordan" },
+    { text: "I've failed over and over and over again in my life. And that is why I succeed.", author: "Michael Jordan" },
     { text: "Pain is temporary. Quitting lasts forever.", author: "Lance Armstrong" },
     { text: "Don't wish it were easier. Wish you were better.", author: "Jim Rohn" },
     { text: "Success is stumbling from failure to failure with no loss of enthusiasm.", author: "Winston Churchill" },
-    { text: "It’s hard to beat a person who never gives up.", author: "Babe Ruth" },
+    { text: "It's hard to beat a person who never gives up.", author: "Babe Ruth" },
     { text: "You miss 100% of the shots you don't take.", author: "Wayne Gretzky" },
     { text: "A smooth sea never made a skilled sailor.", author: "Franklin D. Roosevelt" },
     { text: "Show me a good loser, and I'll show you a loser.", author: "Vince Lombardi" },
@@ -209,13 +209,26 @@ function displayRandomVideo(){
     document.getElementById('videoContainer').style.display='block';
     document.getElementById('quoteBox').style.display='none';
 
-    videoEl.play().then(() => {
-        if (videoEl.requestFullscreen) videoEl.requestFullscreen();
-        else if (videoEl.webkitRequestFullscreen) videoEl.webkitRequestFullscreen();  
-        else if (videoEl.msRequestFullscreen) videoEl.msRequestFullscreen();
-    }).catch(()=>{});
+    // Auto-play and enter fullscreen
+    const playPromise = videoEl.play();
+    
+    if (playPromise !== undefined) {
+        playPromise.then(() => {
+            // Video played successfully, now try to enter fullscreen
+            if (videoEl.requestFullscreen) {
+                videoEl.requestFullscreen().catch(e => console.log("Fullscreen error:", e));
+            } else if (videoEl.webkitRequestFullscreen) {
+                videoEl.webkitRequestFullscreen().catch(e => console.log("Fullscreen error:", e));
+            } else if (videoEl.msRequestFullscreen) {
+                videoEl.msRequestFullscreen().catch(e => console.log("Fullscreen error:", e));
+            }
+        }).catch(e => {
+            console.log("Video autoplay failed:", e);
+            // If autoplay fails, show controls so user can manually play
+            videoEl.controls = true;
+        });
+    }
 }
-
 
 function changeBackground(){
     document.getElementById('backgroundImage').style.backgroundImage = `url('${getRandomElement(backgroundImages)}')`;
@@ -270,12 +283,21 @@ function enableAudioOnTouch() {
 document.addEventListener('click', enableAudioOnTouch);
 document.addEventListener('touchstart', enableAudioOnTouch);
 
-
-    
+// Add click functionality to change content
+document.addEventListener('click', function(e) {
+    // Don't trigger if clicking on audio controls or video controls
+    if (!e.target.closest('.audio-controls') && !e.target.closest('video')) {
+        if(Math.random() < 0.7){
+            currentContentType = 'quote';
+            displayRandomQuote();
+        } else {
+            currentContentType = 'video';
+            displayRandomVideo();
+        }
+        changeBackground();
+    }
+});
 </script>
 
 </body>
 </html>
-
-
-evolving minimalism 
